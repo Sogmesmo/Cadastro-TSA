@@ -1,5 +1,6 @@
 <template>
     <header>
+        <img src="@/assets/tsa-logo.png" alt="Logo">
         <Navbar/>
         
     </header>
@@ -26,9 +27,17 @@ export default {
     box-sizing: border-box;
 }
 header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
     width: 100vw;
     background-color:#17222D ;
     padding: 15px;
 }
+ header img {
+     max-width: 200px;
+     
+ }
+
 
 </style>

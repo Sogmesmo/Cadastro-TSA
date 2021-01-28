@@ -20,7 +20,7 @@ export default {
  nav {
      display: flex;
      align-items: center;
-     justify-content:flex-end;
+     justify-content: center;
  }
  nav .menu-item {
      color: #fff;

@@ -1,6 +1,8 @@
 <template>
   <div id="app"> 
     <Menu/>
+    <Cadastro/>
+    <Footer/>
   </div>
 </template>
 
@@ -8,11 +10,15 @@
 
 
 import Menu from './components/Menu.vue'
+import Cadastro from './components/Cadastro.vue'
+import Footer from './components/Footer.vue'
 
 export default {
   name: 'App',
   components: {
-   Menu
+   Menu,
+   Cadastro,
+   Footer
     
   }
 }
