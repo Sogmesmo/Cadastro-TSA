@@ -10,7 +10,7 @@
              <label for="email">Email</label>
              <input type="text"  class="input" v-model="emailField">
 
-             <label for="cpf">CPF</label>
+             <label id="inputcpf" for="cpf">CPF   *</label>
              <input type="text"  class="input" v-model="cpfField">
          </div> 
          <div id="end">
@@ -32,10 +32,10 @@
         </div>
         <h1>  Forma de Pagamento </h1>  
          <div id="pagamento">  
-            <label for="male">
-                <input type="radio" id="male" :value="Male" v-model="radioBoxOption"> Cartao de Credito
+            <label >
+                <input type="radio" id="Credito" value="Cartao de Credito" v-model="picked"> Cartao de Credito
            </label>
-           <label for="female"> <input type="radio"  id="female" :value="Female" v-model="radioBoxOption"> Boleto Bancario
+           <label> <input type="radio"  id="Boleto" value="Boleto Bancario" v-model="picked"> Boleto Bancario
            </label>
            <div id="end">
          <div class="colun1">
@@ -56,12 +56,15 @@
            
             </div> 
           <h4>Seu cartão será debitado em R$ 49,00</h4>
-            <button @click="salvar"> REALIZAR MATRÍCULA</button>
+            <button @click="salvar"> REALIZAR MATRÍCULA</button><br><br>
+            <small id="cpferro" v-show="erro"> PREENCHA CAMPOS OBRIGATORIOS *</small><br>
             <div>
                 
             </div>
    
-                <h1>Listas</h1>
+                <h1>Listas</h1><br><br>
+
+                <input id="busca" type="text" placeholder="Buscar Nome" v-model="busca"><br><br><br>
       <table id="listaT">
         <thead>
             <tr class="tabela">
@@ -73,7 +76,7 @@
         </thead>     
      </table>
 
-         <div v-for="cliente in clientes" :key="cliente.id">
+         <div v-for="cliente in resultadoBusca" :key="cliente.id">
            
             <Cadastro :cliente="cliente" />
         </div>
@@ -94,6 +97,9 @@ export default {
   name: 'App',
     data(){
       return {
+
+          busca: "",
+          erro: false,
               nomeField: "",
               emailField: "",
               cpfField: "",
@@ -108,17 +114,73 @@ export default {
             
         clientes: [{
               id: 1,
-              nomeField: "Geice Gomes",
-              emailField: "sogmesmo@gmail.com",
-              cpfField: "4654654",
-              endereçoField: "",
-              cepField: "",
-              estadoField:"",
-              cidadeField: "bhuasfuihai" ,
-              nomeCField:"",
-              numeroCField:"",
-              dataEField: "",
-              passwordField:""
+              nome: "Jane Castro",
+              email: "janecastro@gmail.com",
+              cpf: "222.333.666-48",
+              endereço: "Rua Carmezia 89",
+              cep: "",
+              estado:"",
+              cidade: "Betin" ,
+              nomeC:"",
+              numeroC:"",
+              dataE: "",
+              password:""
+        },
+        {
+              id: 2,
+              nome: "Geice Gomes",
+              email: "sogmesmo@gmail.com",
+              cpf: "111.888.856-18",
+              endereço: "Rua Tamboril 692",
+              cep: "",
+              estado:"Minas Gerais ",
+              cidade: "Belo Horizonte" ,
+              nomeC:"----------",
+              numeroC:"---------",
+              dataE: "----------",
+              password:"----------"
+        },
+        {
+              id: 3,
+              nome: "Debora Souto",
+              email: "adebora@gmail.com",
+              cpf: "181.878.656-19",
+              endereço: "Rua campanha 55",
+              cep: "",
+              estado:" ",
+              cidade: "Londrina" ,
+              nomeC:"----------",
+              numeroC:"---------",
+              dataE: "----------",
+              password:"----------"
+        },
+        {
+              id: 4,
+              nome: "Arthur Avelar",
+              email: "avelar@gmail.com",
+              cpf: "711.388.256-48",
+              endereço: "Rua mococa 32",
+              cep: "",
+              estado:" ",
+              cidade: "Rio de Janeiro" ,
+              nomeC:"----------",
+              numeroC:"---------",
+              dataE: "----------",
+              password:"----------"
+        },
+      {
+              id: 5,
+              nome: "Lucas Prates",
+              email: "lucas@gmail.com",
+              cpf: "111.222.856-18",
+              endereço: "Rua lavanda 6",
+              cep: "",
+              estado:" Sao Paulo ",
+              cidade: "Sao Paulo" ,
+              nomeC:"----------",
+              numeroC:"---------",
+              dataE: "----------",
+              password:"----------"
         },
            
          ] 
@@ -127,9 +189,9 @@ export default {
 
    methods:{
         salvar: function(){
-          if(this.nomeField == "" || this.nomeField ){
-              console.log("erro");
-          }else{
+            if( this.cpfField == "" ||  this.cpfField == " "){
+            this.erro = true;
+            }else{
             this.clientes.push({  
               nome: this.nomeField,
               email: this.emailField,
@@ -155,7 +217,18 @@ export default {
              this.nomeCField = "";
              this.dataEField = "";
              this.passwordField = "";
+                this.erro = false;
         }
+        }
+    },
+
+    computed: {
+        resultadoBusca: function(){
+            if(this.busca == '' || this.busca == ' '){
+                return this.clientes;
+            }else{
+                return this.clientes.filter(cliente => cliente.nome == this.busca)
+            }
         }
     },
 
@@ -186,6 +259,10 @@ export default {
         margin: 50px;
         padding: 0px 0px 0px 20%
             
+ }
+ #cpferro {
+     margin-left: 40%;
+     color: red;
  }
  
  .input{
@@ -257,7 +334,7 @@ export default {
      text-align: center;
      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     
-
+ /* css lista/busca*/
  }
   #listaT {
       width: 50% ;
@@ -266,6 +343,19 @@ export default {
  }
  th{
     border-bottom: 1px solid #ddd;
+}
+textarea:focus, input:focus, select:focus {
+    outline: 0;
+}
+
+#busca {
+     margin: 10px 5px 10px 5px;
+     height: 30px;
+     width: 40vw;
+     border-radius: 10px 20px;
+     background-color: #EFF4F9;
+     margin-left: 28%;
+
 }
 </style>
 

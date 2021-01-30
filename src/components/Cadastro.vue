@@ -1,12 +1,14 @@
 <template>
 <div>          
      <table id="listaT">
+         <thead>
             <tr>
-               <td>{{cliente.nomeField}}</td>
-               <td>{{cliente.emailField}}</td>
-               <td>{{cliente.cpfField}}</td>
-               <td>{{cliente.cidadeField}} - {{cliente.endereçoField}}</td>
+               <td>{{cliente.nome}}</td> 
+               <td>{{cliente.email}}</td>  
+               <td>{{cliente.cpf}}</td>  
+               <td>{{cliente.cidade}}</td>  
             </tr>
+            </thead>
      </table>
   </div> 
 </template>
@@ -19,8 +21,10 @@ export default {
 
         props: {
              cliente: Object
-            }
-        }     
+        },
+
+}   
+
 </script>
 
 <style scoped>
@@ -35,14 +39,15 @@ export default {
     
  }
 
- #listaT {
-      width: 50% ;
-      margin-left: 25%;
-
-     
-    
+ table {
+      margin-left:  25%;
+      width: 50%;      
  }
-  td {
-    border-bottom: 1px solid #ddd;
+  tr,td {
+      
+      height: 50px;
+      text-align: left; 
+      
+      padding: 15px;  
 }
 </style>
